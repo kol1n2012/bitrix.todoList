@@ -1,7 +1,7 @@
 <? if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) die();
 
 use Bitrix\Main\Loader;
-use Bitrix\Highloadblock as HL;
+use Bitrix\Highloadblock\HighloadBlockTable as HLBT;
 use Bitrix\Main\Data\Cache;
 
 class TodoList extends CBitrixComponent
@@ -14,6 +14,7 @@ class TodoList extends CBitrixComponent
     public function __construct($component = null)
     {
         Loader::includeModule('highloadblock');
+		CJSCore::Init(['jquery']);
 
         parent::__construct($component);
     }
@@ -65,11 +66,11 @@ class TodoList extends CBitrixComponent
 
         if(!$hlId) return;
 
-        $hlblock = HL\HighloadBlockTable::getById($hlId)->fetch();
+        $hlblock = HLBT::getById($hlId)->fetch();
 
         if(!$hlblock) return;
 
-        $entity = HL\HighloadBlockTable::compileEntity($hlblock);
+        $entity = HLBT::compileEntity($hlblock);
 
         if(!$entity) return;
 
