@@ -2,20 +2,20 @@ $(function () {
     //кнопки добавления записи и редактирования
     $(document).on("click", ".todo-element-edit-js", function () {
         var request = $.ajax({
-                url: '/todo_list/element.php',
-                method: 'POST',
-                data: {
+            url: '/todo_list/element.php',
+            method: 'POST',
+            data: {
                 ID: $(this).data('id'),
                 sessid: BX.message('bitrix_sessid')
             }
         });
-        
+
         request.done(function (modal) {
             let modalContent = $(modal).find('.modal-content');
             $('#todoElementModal .modal-dialog').html(modalContent);
         });
     });
-    
+
     //кнопки удаления записи и редактирования
     $(document).on("click", ".todo-element-remove-js", function () {
         var data = {
@@ -24,7 +24,7 @@ $(function () {
         };
 
         var request = $.ajax({
-                url: '/bitrix/services/main/ajax.php?' + $.param({
+            url: '/bitrix/services/main/ajax.php?' + $.param({
                 c: 'project:todo.element',
                 action: 'remove',
                 mode: 'class'
@@ -49,13 +49,15 @@ $(function () {
 
         e.preventDefault();
 
+        $(this).find('.js-todoListElement-modal-button-save').addClass('disabled');
+        
         var data = {
             data: $(this).serialize(),
             sessid: BX.message('bitrix_sessid')
         };
 
         var request = $.ajax({
-                url: '/bitrix/services/main/ajax.php?' + $.param({
+            url: '/bitrix/services/main/ajax.php?' + $.param({
                 c: 'project:todo.element',
                 action: 'save',
                 mode: 'class'
@@ -71,17 +73,16 @@ $(function () {
             pageUpdate();
         });
 
-    });  
+    });
 
     //обработчик обновления страницы
-    function pageUpdate()
-    {
+    function pageUpdate() {
         var request = $.ajax({
-                url: '/todo_list/',
-                method: 'GET',
-                data: {}
+            url: '/todo_list/',
+            method: 'GET',
+            data: {}
         });
-        
+
         request.done(function (page) {
             let pageContent = $(page).find('#workarea-inner');
             $('#workarea').html(pageContent);
