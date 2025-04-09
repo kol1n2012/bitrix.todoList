@@ -17,26 +17,18 @@ $collection = $component->getCollection();
             <th scope="col">Описание</th>
             <th scope="col">Теги</th>
             <th scope="col"></th>
-            <th scope="col"></th>
         </tr>
         </thead>
         <tbody>
         <? foreach ($collection as $_k => $element): ?>
             <tr>
                 <th scope="row"><?= ++$_k ?></th>
-                <td><?= $element['UF_TITLE'] ?></td>
+                <td><a href="#" class="todo-element-edit-js" data-id="<?= $element['ID'] ?>" data-bs-toggle="modal" data-bs-target="#todoElementModal"><?= $element['UF_TITLE'] ?></a></td>
                 <td><?= $element['UF_DESCRIPTION'] ?></td>
                 <td style="max-width: 150px;">
                     <? foreach ($element['UF_TAGS'] as $tag): ?>
                         <span class="badge text-bg-info"><?= $tag ?></span>
                     <? endforeach ?>
-                </td>
-                <td>
-                    <a href="#" class="todo-element-edit-js" data-id="<?= $element['ID'] ?>" data-mdb-tooltip-init=""
-                       aria-label="Edit" data-mdb-original-title="Edit" data-mdb-tooltip-initialized="true"
-                       data-bs-toggle="modal" data-bs-target="#todoElementModal">
-                        <i class="fas fa-pencil fa-lg text-success" aria-hidden="true"></i>
-                    </a>
                 </td>
                 <td>
                     <a href="#" class="todo-element-remove-js" data-id="<?= $element['ID'] ?>" data-mdb-tooltip-init=""
